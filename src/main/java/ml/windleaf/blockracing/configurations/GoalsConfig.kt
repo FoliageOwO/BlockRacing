@@ -3,6 +3,7 @@ package ml.windleaf.blockracing.configurations
 import de.leonhard.storage.Yaml
 import ml.windleaf.blockracing.entity.GoalColumn
 import ml.windleaf.blockracing.entity.Rating
+import kotlin.reflect.typeOf
 
 class GoalsConfig: IConfiguration("goals") {
   lateinit var goals: Yaml
@@ -13,7 +14,8 @@ class GoalsConfig: IConfiguration("goals") {
 
   fun getRatings(): ArrayList<Rating> {
     val result = arrayListOf<Rating>()
-    goals.getStringList("goals").forEach { ratingKey ->
+    (goals.get("goals") as LinkedHashMap<String, Any>).forEach { entry ->
+      val ratingKey = entry.key
       val prefix = "goals.$ratingKey"
       val name = goals.getString("$prefix.name")
       val color = goals.getString("$prefix.color")
