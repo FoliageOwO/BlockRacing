@@ -1,0 +1,12 @@
+goals:
+  easy:
+    name: '简单'
+    color: '&a'
+    blocks:
+      - crafting_table
+      - wooden_pickaxe
+  normal:
+    name: '普通'
+    color: '&6'
+    blocks:
+      - iron_pickaxe

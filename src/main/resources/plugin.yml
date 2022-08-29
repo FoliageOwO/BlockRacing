@@ -5,3 +5,8 @@ api-version: 1.18
 authors: [ WindLeaf ]
 description: 方块竞速 - 灵感来源自 BV1rN4y1g77x
 website: https://github.com/WindLeaf233/BlockRacing
+commands:
+  blockracing:
+    description: BlockRacing 主命令
+    usage: /blockracing help
+    aliases: [br]

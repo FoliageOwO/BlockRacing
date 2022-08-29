@@ -156,10 +156,5 @@
             <artifactId>IF</artifactId>
             <version>0.10.7</version>
         </dependency>
-        <dependency>
-            <groupId>com.github.WindLeaf233</groupId>
-            <artifactId>PlugApi</artifactId>
-            <version>1.0.2</version>
-        </dependency>
     </dependencies>
 </project>
