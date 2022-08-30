@@ -21,8 +21,8 @@ class BlockRacing: JavaPlugin() {
     config.options().copyDefaults()
     saveDefaultConfig()
 
-    registerCommands()
     configManager = ConfigManager()
+    registerCommands()
 
     val endTime = System.currentTimeMillis()
     pluginLogger.log("&a加载完成, 共耗时 ${endTime - startTime} 毫秒!")

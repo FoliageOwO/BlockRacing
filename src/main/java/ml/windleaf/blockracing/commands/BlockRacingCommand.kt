@@ -4,13 +4,14 @@ import ml.windleaf.blockracing.BlockRacing
 import ml.windleaf.blockracing.BlockRacing.Companion.pluginLogger
 import ml.windleaf.blockracing.configurations.GoalsConfig
 import ml.windleaf.blockracing.entity.GoalColumn
-import net.md_5.bungee.api.chat.TranslatableComponent
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
 import org.bukkit.command.TabCompleter
 
 class BlockRacingCommand: CommandExecutor, TabCompleter {
+  private val config = BlockRacing.configInstances["goals"] as GoalsConfig
+
   override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
     when (args.size) {
       // 发送帮助
@@ -49,7 +50,6 @@ class BlockRacingCommand: CommandExecutor, TabCompleter {
    *  - 铁镐
    */
   private fun getGoals(sender: CommandSender) {
-    val config = BlockRacing.configInstances["goals"] as GoalsConfig
     val goals = config.getGoals()
     val ratings = config.getRatings()
     pluginLogger.send(sender, "--- 所有可用目标如下 ---")
@@ -88,7 +88,10 @@ class BlockRacingCommand: CommandExecutor, TabCompleter {
     }
   }
 
-  private fun getTranslation(blockName: String) = TranslatableComponent("block.minecraft.$blockName").translate
+  private fun getTranslation(blockName: String): String {
+    val material = config.blocks[blockName]
+    return "todo"
+  }
 
   override fun onTabComplete(
     sender: CommandSender,
