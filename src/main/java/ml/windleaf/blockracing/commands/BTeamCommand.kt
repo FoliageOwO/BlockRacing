@@ -112,6 +112,6 @@ class BTeamCommand: CommandExecutor, TabCompleter {
     label: String,
     args: Array<out String>
   ): MutableList<String>? {
-    TODO("Not yet implemented")
+    return mutableListOf()
   }
 }
