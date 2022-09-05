@@ -32,7 +32,7 @@ class BTeamCommand: CommandExecutor, TabCompleter {
       }
       3 -> {
         when (first) {
-          "join" -> joinTeam(args[1], Bukkit.getPlayer(args[2]))
+          "join" -> joinTeam(args[1], Bukkit.getPlayer(args[2]), args[2])
         }
       }
       else -> errorCommand()
@@ -60,12 +60,12 @@ class BTeamCommand: CommandExecutor, TabCompleter {
     } else pluginLogger.send(sender, "&c请输入一个正确的数字!")
   }
 
-  private fun joinTeam(name: String, player: Player?) {
+  private fun joinTeam(name: String, player: Player?, playerName: String) {
     if (player != null) {
       val team = BlockRacing.teamManager.joinTeam(name, player)
-      val message = if (team != null) "&a成功使玩家 &6${name} &a加入 ${team.color}${team.teamName}&a!" else "&c无法找到该队伍!"
+      val message = if (team != null) "&a成功使玩家 &6${playerName} &a加入 ${team.color}${team.teamName}&a!" else "&c无法找到该队伍!"
       pluginLogger.send(sender, message)
-    } else pluginLogger.send(sender, "&c玩家 &6${name} &c不存在!")
+    } else pluginLogger.send(sender, "&c玩家 &6${playerName} &c不存在!")
   }
 
   private fun errorCommand() =
