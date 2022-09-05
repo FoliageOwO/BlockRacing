@@ -7,6 +7,10 @@ description: 方块竞速 - 灵感来源自 BV1rN4y1g77x
 website: https://github.com/WindLeaf233/BlockRacing
 commands:
   blockracing:
-    description: BlockRacing 主命令
+    description: 方块竞速主命令
     usage: /blockracing help
     aliases: [br]
+  bteam:
+    description: 方块竞速的队伍命令
+    usage: /bteam help
+    aliases: [bt]
