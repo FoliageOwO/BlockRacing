@@ -11,27 +11,29 @@ import org.bukkit.command.TabCompleter
 
 class BlockRacingCommand: CommandExecutor, TabCompleter {
   private val config = BlockRacing.configInstances["goals"] as GoalsConfig
+  private lateinit var sender: CommandSender
 
   override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
+    this.sender = sender
+    val first = args.getOrElse(0) { _ -> "" }
     when (args.size) {
-      // 发送帮助
-      0 -> getHelp(sender)
+      0 -> getHelp()
       1 -> {
-        when (args[0]) {
-          "help" -> getHelp(sender)
-          "goals" -> getGoals(sender)
+        when (first) {
+          "help" -> getHelp()
+          "goals" -> getGoals()
+          else -> errorCommand()
         }
       }
-      else -> errorCommand(sender)
+      else -> errorCommand()
     }
-
     return true
   }
 
-  private fun errorCommand(sender: CommandSender) =
+  private fun errorCommand() =
     pluginLogger.send(sender, "&c这是一个错误的命令, 请使用 &6/br help &c来获取帮助!")
 
-  private fun getHelp(sender: CommandSender) =
+  private fun getHelp() =
     listOf(
       "&a--- [BlockRacing Help] ---",
       "&2/br [help] &f- &6查看此帮助",
@@ -49,7 +51,7 @@ class BlockRacingCommand: CommandExecutor, TabCompleter {
    * 普通|normal:
    *  - 铁镐
    */
-  private fun getGoals(sender: CommandSender) {
+  private fun getGoals() {
     val goals = config.getGoals()
     val ratings = config.getRatings()
     pluginLogger.send(sender, "--- 所有可用目标如下 ---")
