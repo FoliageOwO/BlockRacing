@@ -103,7 +103,7 @@ class BTeamCommand: CommandExecutor, TabCompleter {
       "&2/bt join <name> <player> &f- &6使玩家加入一个队伍",
       "&2/bt randomize <size> &f- &6随机分配指定数量队伍"
     ).forEach {
-      pluginLogger.send(sender, it)
+      pluginLogger.send(sender, it, withPrefix = false)
     }
 
   override fun onTabComplete(

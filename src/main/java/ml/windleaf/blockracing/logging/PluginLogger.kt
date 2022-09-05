@@ -16,7 +16,7 @@ class PluginLogger(name: String, color: String) {
   fun send(sender: CommandSender, vararg any: Any, withPrefix: Boolean = true) {
     val sb = StringBuilder()
     any.forEach { obj ->
-      sb.append(" $obj ")
+      sb.append("$obj ")
     }
     sender.sendMessage(ChatUtil.color("${if (withPrefix) prefix else ""}$sb"))
   }

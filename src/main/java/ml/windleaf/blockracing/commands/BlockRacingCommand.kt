@@ -39,7 +39,7 @@ class BlockRacingCommand: CommandExecutor, TabCompleter {
       "&2/br [help] &f- &6查看此帮助",
       "&2/br goals &f- &6查看所有可用目标",
     ).forEach {
-      pluginLogger.send(sender, it)
+      pluginLogger.send(sender, it, withPrefix = false)
     }
 
   /**
