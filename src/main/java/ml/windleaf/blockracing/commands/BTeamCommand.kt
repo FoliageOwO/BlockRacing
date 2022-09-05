@@ -28,11 +28,13 @@ class BTeamCommand: CommandExecutor, TabCompleter {
         when (first) {
           "remove" -> removeTeam(args[1])
           "randomize" -> randomizeTeam(args[1].toIntOrNull())
+          else -> errorCommand()
         }
       }
       3 -> {
         when (first) {
           "join" -> joinTeam(args[1], Bukkit.getPlayer(args[2]), args[2])
+          else -> errorCommand()
         }
       }
       else -> errorCommand()
