@@ -35,6 +35,7 @@ class BTeamCommand: CommandExecutor, TabCompleter {
           "join" -> joinTeam(args[1], Bukkit.getPlayer(args[2]))
         }
       }
+      else -> errorCommand()
     }
     return true
   }
