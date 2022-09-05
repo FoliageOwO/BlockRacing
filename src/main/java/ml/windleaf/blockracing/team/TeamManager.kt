@@ -52,6 +52,7 @@ class TeamManager {
   fun removeAllTeam() {
     teams.values.forEach(Team::reset)
     teams.clear()
+    AvailableTeam.availableList = arrayListOf(*AvailableTeam.values())
   }
 
   fun joinTeam(teamName: String, player: Player): AvailableTeam? {

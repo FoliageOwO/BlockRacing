@@ -17,7 +17,7 @@ enum class AvailableTeam(val teamName: String, val color: String) {
   GRAY("灰队", "&7");
 
   companion object {
-    val availableList: ArrayList<AvailableTeam> = arrayListOf(*values())
+    var availableList: ArrayList<AvailableTeam> = arrayListOf(*values())
 
     /**
      * 获取一个随机的队伍
