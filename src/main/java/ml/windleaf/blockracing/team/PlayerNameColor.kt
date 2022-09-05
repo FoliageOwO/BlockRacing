@@ -2,7 +2,6 @@ package ml.windleaf.blockracing.team
 
 import ml.windleaf.blockracing.utils.ChatUtil
 import org.bukkit.entity.Player
-import java.util.*
 import kotlin.collections.HashMap
 
 /**
@@ -10,7 +9,7 @@ import kotlin.collections.HashMap
  * @see Player.setDisplayName
  */
 class PlayerNameColor {
-  private val dataBackup: HashMap<UUID, String> = hashMapOf()
+  private val dataBackup: HashMap<String, String> = hashMapOf()
 
   /**
    * 将玩家的显示名设置为队伍对应颜色
@@ -19,9 +18,12 @@ class PlayerNameColor {
    * @see Player.setDisplayName
    */
   fun setPlayer(player: Player, team: AvailableTeam) {
-    val originName = player.displayName
-    dataBackup[player.uniqueId] = originName
-    player.setDisplayName(ChatUtil.color(team.color + originName))
+    val uuid = player.uniqueId.toString()
+    if (!dataBackup.containsKey(uuid)) {
+      val originName = player.displayName
+      dataBackup[uuid] = originName
+    }
+    player.setDisplayName(ChatUtil.color(team.color + dataBackup[uuid]))
   }
 
   /**
@@ -29,5 +31,5 @@ class PlayerNameColor {
    * @param player 玩家
    * @see Player.setDisplayName
    */
-  fun reset(player: Player) = player.setDisplayName(ChatUtil.color(dataBackup[player.uniqueId]!!))
+  fun reset(player: Player) = player.setDisplayName(ChatUtil.color(dataBackup[player.uniqueId.toString()]!!))
 }

@@ -4,15 +4,15 @@ import ml.windleaf.blockracing.team.storage.TeamStorage
 import org.bukkit.entity.Player
 
 class Team(val team: AvailableTeam) {
-  val playerList: ArrayList<Player> = arrayListOf()
+  val players: HashMap<String, Player> = hashMapOf()
   var storage: TeamStorage = TeamStorage(this.team)
 
   /**
    * 重置队伍
    */
   fun reset() {
-    playerList.forEach {
-      TeamManager.playerNameColor.reset(it)
+    players.forEach {
+      TeamManager.playerNameColor.reset(it.value)
     }
   }
 }

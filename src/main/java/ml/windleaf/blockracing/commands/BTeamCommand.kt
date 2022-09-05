@@ -83,8 +83,8 @@ class BTeamCommand: CommandExecutor, TabCompleter {
     teams.forEach {
       val team = it.team
       pluginLogger.send(sender, "${team.color}${team.teamName}")
-      it.playerList.forEach { p ->
-        pluginLogger.send(sender, "${team.color} - ${p.displayName}")
+      it.players.forEach { entry ->
+        pluginLogger.send(sender, "${team.color} - ${entry.value.displayName}")
       }
     }
   }

@@ -56,15 +56,16 @@ class TeamManager {
   }
 
   fun joinTeam(teamName: String, player: Player): AvailableTeam? {
+    val uuid = player.uniqueId.toString()
     return if (teams.containsKey(teamName)) {
       teams.forEach { entry ->
         val team = entry.value
-        if (team.playerList.contains(player)) {
-          team.playerList.remove(player)
+        if (team.players.containsKey(uuid)) {
+          team.players.remove(uuid)
         }
       }
       val team = teams[teamName]!!
-      team.playerList.add(player)
+      team.players[uuid] = player
       playerNameColor.setPlayer(player, team.team)
       pluginLogger.send(player, "&a你已加入 ${team.team.color}${team.team.teamName}&a!")
       team.team
@@ -72,7 +73,7 @@ class TeamManager {
   }
 
   fun openTeamStorage(player: Player): Boolean {
-    val team = teams.values.find { it.playerList.contains(player) } ?: return false
+    val team = teams.values.find { it.players.containsKey(player.uniqueId.toString()) } ?: return false
     team.storage.open(player)
     return true
   }
