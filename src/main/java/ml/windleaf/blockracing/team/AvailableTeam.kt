@@ -17,6 +17,8 @@ enum class AvailableTeam(val teamName: String, val color: String) {
   GRAY("灰队", "&7");
 
   companion object {
+    val availableList: ArrayList<AvailableTeam> = arrayListOf(*values())
+
     /**
      * 获取一个随机的队伍
      * @param expect 获取除了这个列表中的队伍
@@ -24,13 +26,13 @@ enum class AvailableTeam(val teamName: String, val color: String) {
      * @see AvailableTeam
      */
     fun getRandomTeam(expect: Collection<AvailableTeam>): AvailableTeam {
-      val size = values().size
+      val size = availableList.size
       val randomIndex = (0 until size).random()
       var team: AvailableTeam? = null
-      while (team != null && !expect.contains(team)) {
-        team = values()[randomIndex]
+      while (team == null || expect.contains(team)) {
+        team = availableList[randomIndex]
       }
-      return team!!
+      return team
     }
   }
 }

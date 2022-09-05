@@ -28,11 +28,11 @@ class TeamManager {
   fun addRandomTeam(): AvailableTeam? {
     return if (teams.size != AvailableTeam.values().size) {
       var team: AvailableTeam? = null
-      while (team != null && !teams.values.any { it.team == team }) {
+      while (team == null || teams.values.any { it.team == team }) {
         team = AvailableTeam.getRandomTeam(expect = teams.values.map { it.team })
       }
-      team!!
       teams[team.teamName] = Team(team)
+      AvailableTeam.availableList.remove(team)
       team
     } else null
   }
@@ -42,6 +42,7 @@ class TeamManager {
       val team = teams[name]!!
       team.reset()
       teams.remove(name)
+      AvailableTeam.availableList.add(team.team)
       team.team
     } else null
   }
