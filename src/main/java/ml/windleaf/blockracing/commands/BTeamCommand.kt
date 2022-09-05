@@ -21,6 +21,8 @@ class BTeamCommand: CommandExecutor, TabCompleter {
         when (first) {
           "help" -> getHelp()
           "new" -> newTeam()
+          "clear" -> removeAllTeam()
+          "list" -> getList()
           else -> errorCommand()
         }
       }
@@ -70,6 +72,23 @@ class BTeamCommand: CommandExecutor, TabCompleter {
     } else pluginLogger.send(sender, "&c玩家 &6${playerName} &c不存在!")
   }
 
+  private fun removeAllTeam() {
+    BlockRacing.teamManager.removeAllTeam()
+    pluginLogger.send(sender, "&a成功清除所有队伍!")
+  }
+
+  private fun getList() {
+    pluginLogger.send(sender, "--- 所有队伍如下 ---")
+    val teams = BlockRacing.teamManager.getTeams()
+    teams.forEach {
+      val team = it.team
+      pluginLogger.send(sender, "${team.color}${team.teamName}")
+      it.playerList.forEach { p ->
+        pluginLogger.send(sender, "${team.color} - ${p.displayName}")
+      }
+    }
+  }
+
   private fun errorCommand() =
     pluginLogger.send(sender, "&c这是一个错误的命令, 请使用 &6/bt help &c来获取帮助!")
 
@@ -78,6 +97,8 @@ class BTeamCommand: CommandExecutor, TabCompleter {
       "&a--- [BlockRacing Team Help] ---",
       "&2/bt [help] &f- &6查看此帮助",
       "&2/bt new &f- &6随机新建一个队伍",
+      "&2/bt clear &f- &6清空所有队伍",
+      "&2/bt list &f- &6查看所有队伍",
       "&2/bt remove <name> &f- &6删除一个队伍",
       "&2/bt join <name> <player> &f- &6使玩家加入一个队伍",
       "&2/bt randomize <size> &f- &6随机分配指定数量队伍"

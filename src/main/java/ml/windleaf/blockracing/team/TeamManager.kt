@@ -12,6 +12,8 @@ class TeamManager {
     val playerNameColor = PlayerNameColor()
   }
 
+  fun getTeams(): ArrayList<Team> = ArrayList(teams.values.toList())
+
   fun randomizePlayers(size: Int): Boolean {
     val players = Bukkit.getOnlinePlayers().toList()
     if (size > players.size || size > AvailableTeam.values().size) return false
