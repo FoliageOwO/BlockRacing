@@ -2,6 +2,7 @@ package ml.windleaf.blockracing.team.storage
 
 import com.github.stefvanschie.inventoryframework.gui.type.ChestGui
 import ml.windleaf.blockracing.team.AvailableTeam
+import ml.windleaf.blockracing.utils.ChatUtil
 import org.bukkit.entity.Player
 
 /**
@@ -13,7 +14,7 @@ class TeamStorage(team: AvailableTeam) {
   var storage: ChestGui? = null
 
   init {
-    storage = ChestGui(6, "&b方块竞速 &a- &d团队箱子 &a- ${team.color}${team.teamName}")
+    storage = ChestGui(6, ChatUtil.color("团队箱子 &8- ${team.color}${team.teamName}"))
   }
 
   fun open(player: Player) = storage?.show(player)
