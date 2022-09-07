@@ -4,6 +4,7 @@
 
 ![](https://img.shields.io/github/workflow/status/WindLeaf233/BlockRacing/Build%20CI)
 ![](https://img.shields.io/github/license/WindLeaf233/BlockRacing)
+![](https://img.shields.io/badge/made%20with-%E2%9D%A4-important)
 
 ---
 
