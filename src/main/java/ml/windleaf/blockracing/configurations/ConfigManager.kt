@@ -4,7 +4,8 @@ import ml.windleaf.blockracing.BlockRacing
 
 class ConfigManager {
   var configClassList: List<Class<out IConfiguration>> = arrayListOf(
-    GoalsConfig::class.java
+    GoalsConfig::class.java,
+    PluginConfig::class.java
   )
 
   init {

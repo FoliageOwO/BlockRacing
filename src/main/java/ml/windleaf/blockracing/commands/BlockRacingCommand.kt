@@ -91,8 +91,8 @@ class BlockRacingCommand: CommandExecutor, TabCompleter {
   }
 
   private fun getTranslation(blockName: String): String {
-    val material = config.blocks[blockName]
-    return "todo"
+    val key = "block.minecraft.${blockName}"
+    return BlockRacing.translationManager.getTranslationInstance()?.getTranslation(key) ?: "&o${blockName}"
   }
 
   override fun onTabComplete(
