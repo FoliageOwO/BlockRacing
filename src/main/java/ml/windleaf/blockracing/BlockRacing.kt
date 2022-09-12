@@ -27,6 +27,7 @@ class BlockRacing: JavaPlugin() {
     instance = this
     config.options().copyDefaults()
     saveDefaultConfig()
+    saveResource("goals.yml", false)
 
     configManager = ConfigManager()
     teamManager = TeamManager()

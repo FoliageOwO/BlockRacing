@@ -1,12 +1,41 @@
+# 示例目标配置
+# 在这里设置所有可用目标
 goals:
+  # 此同级每一个键值代表一个目标难度
+  # 此示例中包含 [easy, normal, hard] 三个难度
+  # 可自行添加删除
   easy:
+    # 当前目标难度的显示名
+    # 别的目标难度是一样的
     name: '简单'
+    # 当前目标难度的颜色
+    # 用 & 符号代替颜色符号
+    # 常见的有: &a 绿色 | &e 黄色 | &c 红色
     color: '&a'
+    # 当前目标难度的内容
+    # 必须包含方块英文全名
     blocks:
-      - crafting_table
-      - wooden_pickaxe
+      - crafting_table # 工作台
+      - gray_wool # 灰色羊毛
+      - andesite # 安山岩
+      - sand # 沙子
+      - oak_door # 橡木门
+      - stone_button # 石制按钮... 可自行添加
   normal:
     name: '普通'
-    color: '&6'
+    color: '&e'
     blocks:
-      - iron_pickaxe
+      - white_stained_glass_pane # 白色染色玻璃板
+      - obsidian # 黑曜石
+      - bell # 钟
+      - bamboo # 竹子
+      - blackstone # 黑石
+      - dropper # 投掷器
+  hard:
+    name: '困难'
+    color: '&c'
+    blocks:
+      - diamond_block # 钻石块
+      - crying_obsidian # 哭泣的黑曜石
+      - beacon # 信标
+      - enchanting_table # 附魔台

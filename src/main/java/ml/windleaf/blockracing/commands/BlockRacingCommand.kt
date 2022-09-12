@@ -46,15 +46,15 @@ class BlockRacingCommand: CommandExecutor, TabCompleter {
    * 获取所有可用目标, 以下是例子
    *
    * --- 所有可用目标如下 ---
-   * 简单|easy:
+   * [easy] 简单:
    *  - 工作台
-   * 普通|normal:
-   *  - 铁镐
+   * [normal] 普通:
+   *  - 铁块
    */
   private fun getGoals() {
     val goals = config.getGoals()
     val ratings = config.getRatings()
-    pluginLogger.send(sender, "--- 所有可用目标如下 ---")
+    pluginLogger.send(sender, "--- 所有可用目标如下 ---", withPrefix = false)
 
     data class ColumnsHelp(
       /**
@@ -83,9 +83,9 @@ class BlockRacingCommand: CommandExecutor, TabCompleter {
       val column = help.column
       val color = help.color
 
-      pluginLogger.send(sender, "$color$title:")
+      pluginLogger.send(sender, "$color$title:", withPrefix = false)
       column.blocks.forEach { blockName ->
-        pluginLogger.send(sender, "$color - ${getTranslation(blockName)}")
+        pluginLogger.send(sender, "$color - ${getTranslation(blockName)}", withPrefix = false)
       }
     }
   }
