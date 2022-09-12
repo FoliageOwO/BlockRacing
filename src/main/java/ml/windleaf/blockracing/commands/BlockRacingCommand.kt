@@ -75,7 +75,7 @@ class BlockRacingCommand: CommandExecutor, TabCompleter {
 
     val messages = arrayListOf<ColumnsHelp>()
     ratings.forEach { rating ->
-      messages.add(ColumnsHelp("${rating.key}|${rating.name}", goals.first { it.rating == rating }, rating.color))
+      messages.add(ColumnsHelp("[${rating.key}] ${rating.name}", goals.first { it.rating == rating }, rating.color))
     }
 
     messages.forEach { help ->
