@@ -14,7 +14,7 @@ class BTeamCommand: CommandExecutor, TabCompleter {
 
   override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
     this.sender = sender
-    val first = args.getOrElse(0) { _ -> "" }
+    val first = args.getOrElse(0) { "" }
     when (args.size) {
       0 -> getHelp()
       1 -> {

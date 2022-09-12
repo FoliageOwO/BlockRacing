@@ -8,7 +8,7 @@ import org.bukkit.Material
 
 class GoalsConfig: IConfiguration("goals") {
   private lateinit var goals: Yaml
-  val blocks = hashMapOf<String, Material>()
+  private val blocks = hashMapOf<String, Material>()
 
   override fun loadConfig() {
     goals = Yaml("goals", "plugins/BlockRacing")
@@ -24,12 +24,12 @@ class GoalsConfig: IConfiguration("goals") {
 
   fun getRatings(): ArrayList<Rating> {
     val result = arrayListOf<Rating>()
-    (goals.get("goals") as LinkedHashMap<String, Any>).forEach { entry ->
+    (goals.get("goals") as LinkedHashMap<*, *>).forEach { entry ->
       val ratingKey = entry.key
       val prefix = "goals.$ratingKey"
       val name = goals.getString("$prefix.name")
       val color = goals.getString("$prefix.color")
-      result.add(Rating(ratingKey, name, color))
+      result.add(Rating(ratingKey as String, name, color))
     }
     return result
   }
