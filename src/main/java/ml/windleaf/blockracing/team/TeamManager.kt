@@ -71,10 +71,4 @@ class TeamManager {
       team.team
     } else null
   }
-
-  fun openTeamStorage(player: Player): Boolean {
-    val team = teams.values.find { it.players.containsKey(player.uniqueId.toString()) } ?: return false
-    team.storage.open(player)
-    return true
-  }
 }

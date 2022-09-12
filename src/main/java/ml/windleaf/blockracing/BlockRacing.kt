@@ -4,7 +4,6 @@ import ml.windleaf.blockracing.commands.BTeamCommand
 import ml.windleaf.blockracing.commands.BlockRacingCommand
 import ml.windleaf.blockracing.configurations.ConfigManager
 import ml.windleaf.blockracing.configurations.IConfiguration
-import ml.windleaf.blockracing.events.TeamStorageListener
 import ml.windleaf.blockracing.logging.PluginLogger
 import ml.windleaf.blockracing.team.TeamManager
 import org.bukkit.plugin.java.JavaPlugin
@@ -30,7 +29,6 @@ class BlockRacing: JavaPlugin() {
     configManager = ConfigManager()
     teamManager = TeamManager()
     registerCommands()
-    registerEvents()
 
     val endTime = System.currentTimeMillis()
     pluginLogger.log("&a加载完成, 共耗时 ${endTime - startTime} 毫秒!")
@@ -46,10 +44,6 @@ class BlockRacing: JavaPlugin() {
     val btC = BTeamCommand()
     bt?.setExecutor(btC)
     bt?.tabCompleter = btC
-  }
-
-  private fun registerEvents() {
-    server.pluginManager.registerEvents(TeamStorageListener(), this)
   }
 
   override fun onDisable() {
