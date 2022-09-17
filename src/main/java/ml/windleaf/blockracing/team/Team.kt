@@ -2,7 +2,7 @@ package ml.windleaf.blockracing.team
 
 import org.bukkit.entity.Player
 
-class Team(val team: AvailableTeam) {
+class Team(val team: TeamInfo) {
   val players: HashMap<String, Player> = hashMapOf()
 
   /**

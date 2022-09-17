@@ -17,7 +17,7 @@ class PlayerNameColor {
    * @param team 队伍
    * @see Player.setDisplayName
    */
-  fun setPlayer(player: Player, team: AvailableTeam) {
+  fun setPlayer(player: Player, team: TeamInfo) {
     val uuid = player.uniqueId.toString()
     if (!dataBackup.containsKey(uuid)) {
       val originName = player.displayName

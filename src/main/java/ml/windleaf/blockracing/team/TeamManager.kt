@@ -16,7 +16,7 @@ class TeamManager {
 
   fun randomizePlayers(size: Int): Boolean {
     val players = Bukkit.getOnlinePlayers().toList()
-    if (size > players.size || size > AvailableTeam.values().size) return false
+    if (size > players.size || size > TeamInfo.values().size) return false
     removeAllTeam()
     players.chunked(size) {
       val team = addRandomTeam()!!
@@ -27,24 +27,24 @@ class TeamManager {
     return true
   }
 
-  fun addRandomTeam(): AvailableTeam? {
-    return if (teams.size != AvailableTeam.values().size) {
-      var team: AvailableTeam? = null
+  fun addRandomTeam(): TeamInfo? {
+    return if (teams.size != TeamInfo.values().size) {
+      var team: TeamInfo? = null
       while (team == null || teams.values.any { it.team == team }) {
-        team = AvailableTeam.getRandomTeam(expect = teams.values.map { it.team })
+        team = TeamInfo.getRandomTeam(expect = teams.values.map { it.team })
       }
       teams[team.teamName] = Team(team)
-      AvailableTeam.availableList.remove(team)
+      TeamInfo.availableList.remove(team)
       team
     } else null
   }
 
-  fun removeTeam(name: String): AvailableTeam? {
+  fun removeTeam(name: String): TeamInfo? {
     return if (teams.containsKey(name)) {
       val team = teams[name]!!
       team.reset()
       teams.remove(name)
-      AvailableTeam.availableList.add(team.team)
+      TeamInfo.availableList.add(team.team)
       team.team
     } else null
   }
@@ -52,10 +52,10 @@ class TeamManager {
   fun removeAllTeam() {
     teams.values.forEach(Team::reset)
     teams.clear()
-    AvailableTeam.availableList = arrayListOf(*AvailableTeam.values())
+    TeamInfo.availableList = arrayListOf(*TeamInfo.values())
   }
 
-  fun joinTeam(teamName: String, player: Player): AvailableTeam? {
+  fun joinTeam(teamName: String, player: Player): TeamInfo? {
     val uuid = player.uniqueId.toString()
     return if (teams.containsKey(teamName)) {
       teams.forEach { entry ->

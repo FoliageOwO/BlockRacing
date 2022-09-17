@@ -6,7 +6,7 @@ package ml.windleaf.blockracing.team
  * @param color 队伍颜色
  * @see TeamManager.addRandomTeam
  */
-enum class AvailableTeam(val teamName: String, val color: String) {
+enum class TeamInfo(val teamName: String, val color: String) {
   WHITE("白队", "&f"),
   RED("红队", "&c"),
   YELLOW("黄队", "&e"),
@@ -17,18 +17,18 @@ enum class AvailableTeam(val teamName: String, val color: String) {
   GRAY("灰队", "&7");
 
   companion object {
-    var availableList: ArrayList<AvailableTeam> = arrayListOf(*values())
+    var availableList: ArrayList<TeamInfo> = arrayListOf(*values())
 
     /**
      * 获取一个随机的队伍
      * @param expect 获取除了这个列表中的队伍
      * @return 可用的队伍
-     * @see AvailableTeam
+     * @see TeamInfo
      */
-    fun getRandomTeam(expect: Collection<AvailableTeam>): AvailableTeam {
+    fun getRandomTeam(expect: Collection<TeamInfo>): TeamInfo {
       val size = availableList.size
       val randomIndex = (0 until size).random()
-      var team: AvailableTeam? = null
+      var team: TeamInfo? = null
       while (team == null || expect.contains(team)) {
         team = availableList[randomIndex]
       }
