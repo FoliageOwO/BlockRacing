@@ -1,4 +1,4 @@
-package ml.windleaf.blockracing.entity
+package ml.windleaf.blockracing.entity.goals
 
 /**
  * 目标栏目

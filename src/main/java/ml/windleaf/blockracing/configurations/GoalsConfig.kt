@@ -2,8 +2,8 @@ package ml.windleaf.blockracing.configurations
 
 import de.leonhard.storage.Yaml
 import ml.windleaf.blockracing.BlockRacing.Companion.pluginLogger
-import ml.windleaf.blockracing.entity.GoalColumn
-import ml.windleaf.blockracing.entity.Rating
+import ml.windleaf.blockracing.entity.goals.GoalColumn
+import ml.windleaf.blockracing.entity.goals.Rating
 import org.bukkit.Material
 
 class GoalsConfig: IConfiguration("goals") {

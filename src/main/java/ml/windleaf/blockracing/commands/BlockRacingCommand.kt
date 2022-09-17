@@ -3,7 +3,7 @@ package ml.windleaf.blockracing.commands
 import ml.windleaf.blockracing.BlockRacing
 import ml.windleaf.blockracing.BlockRacing.Companion.pluginLogger
 import ml.windleaf.blockracing.configurations.GoalsConfig
-import ml.windleaf.blockracing.entity.GoalColumn
+import ml.windleaf.blockracing.entity.goals.GoalColumn
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender

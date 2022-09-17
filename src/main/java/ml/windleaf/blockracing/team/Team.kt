@@ -1,9 +1,9 @@
 package ml.windleaf.blockracing.team
 
-import org.bukkit.entity.Player
+import ml.windleaf.blockracing.entity.TeamPlayer
 
 class Team(val team: AvailableTeam) {
-  val players: HashMap<String, Player> = hashMapOf()
+  val players: HashMap<String, TeamPlayer> = hashMapOf()
 
   /**
    * 重置队伍
