@@ -1,6 +1,6 @@
 package ml.windleaf.blockracing.team
 
-import ml.windleaf.blockracing.utils.ChatUtil
+import ml.windleaf.blockracing.utils.StringUtil
 import org.bukkit.entity.Player
 import kotlin.collections.HashMap
 
@@ -23,7 +23,7 @@ class PlayerNameColor {
       val originName = player.displayName
       dataBackup[uuid] = originName
     }
-    player.setDisplayName(ChatUtil.color(team.color + dataBackup[uuid]))
+    player.setDisplayName(StringUtil.color(team.color + dataBackup[uuid]))
   }
 
   /**
@@ -31,5 +31,5 @@ class PlayerNameColor {
    * @param player 玩家
    * @see Player.setDisplayName
    */
-  fun reset(player: Player) = player.setDisplayName(ChatUtil.color(dataBackup[player.uniqueId.toString()]!!))
+  fun reset(player: Player) = player.setDisplayName(StringUtil.color(dataBackup[player.uniqueId.toString()]!!))
 }

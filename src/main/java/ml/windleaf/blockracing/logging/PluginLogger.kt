@@ -1,6 +1,6 @@
 package ml.windleaf.blockracing.logging
 
-import ml.windleaf.blockracing.utils.ChatUtil
+import ml.windleaf.blockracing.utils.StringUtil
 import org.bukkit.Bukkit
 import org.bukkit.command.CommandSender
 
@@ -18,7 +18,7 @@ class PluginLogger(name: String, color: String) {
     any.forEach { obj ->
       sb.append("$obj ")
     }
-    sender.sendMessage(ChatUtil.color("${if (withPrefix) prefix else ""}$sb"))
+    sender.sendMessage(StringUtil.color("${if (withPrefix) prefix else ""}$sb"))
   }
 
   /**
