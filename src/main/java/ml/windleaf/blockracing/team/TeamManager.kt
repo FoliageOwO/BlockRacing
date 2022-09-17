@@ -65,7 +65,6 @@ class TeamManager {
           team.players.remove(uuid)
         }
       }
-      "".toInt()
       val team = teams[teamName]!!
       team.players[uuid] = player
       playerNameColor.setPlayer(player, team.info)
