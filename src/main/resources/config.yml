@@ -1,1 +1,25 @@
 translation: 'zh_cn'
+score:
+  # 计分板标题
+  title: '&e目标'
+  # 计分板上显示的每个队伍的目标数量
+  # 但不包括已完成的一条
+  # 默认为 3
+  size: 3
+  # 计分板上的文字格式
+  format:
+    # 队伍信息格式
+    # 可用占位符如下
+    #   {name} 队伍颜色+队伍名
+    #   {score} 队伍分数
+    #   {mode} 当前游戏模式
+    team: '{name}&7: &e{score} &7| &f{mode}'
+    # 队伍目标格式
+    # 可用占位符如下
+    #   {name} 当前目标的名字
+    #   {rating} 当前目标的评级
+    goal:
+      # 普通目标
+      normal: '{rating} &7| &f{name}'
+      # 已完成的一条目标
+      success: '&a√&7: {rating} &7| &f{name}'

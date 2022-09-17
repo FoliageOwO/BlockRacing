@@ -12,7 +12,7 @@ data class GoalColumn(
   val rating: Rating,
 
   /**
-   * 该难度目标的所有方块名
+   * 该难度目标的所有方块
    */
-  val blocks: List<String>
+  val blocks: List<GoalBlock>
 )

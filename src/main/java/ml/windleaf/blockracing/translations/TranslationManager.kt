@@ -9,5 +9,12 @@ class TranslationManager {
     "zh_cn" to Translation("zh_cn")
   )
 
+  companion object {
+    fun getBlockTranslation(blockName: String): String {
+      val key = "block.minecraft.${blockName}"
+      return BlockRacing.translationManager.getTranslationInstance()?.getTranslation(key) ?: "&o${blockName}"
+    }
+  }
+
   fun getTranslationInstance() = translations[pluginConfig.get("translation")]
 }
