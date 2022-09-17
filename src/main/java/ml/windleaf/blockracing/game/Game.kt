@@ -7,7 +7,6 @@ import ml.windleaf.blockracing.BlockRacing.Companion.teamManager
 import ml.windleaf.blockracing.configurations.GoalsConfig
 import ml.windleaf.blockracing.configurations.PluginConfig
 import ml.windleaf.blockracing.entity.goals.GoalBlock
-import ml.windleaf.blockracing.entity.goals.Rating
 import ml.windleaf.blockracing.team.Team
 
 class Game {
