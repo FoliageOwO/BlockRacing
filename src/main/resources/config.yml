@@ -1,4 +1,5 @@
 translation: 'zh_cn'
+
 score:
   # 计分板标题
   title: '&e目标'
@@ -23,3 +24,18 @@ score:
       normal: '{rating} &7| &f{name}'
       # 已完成的一条目标
       success: '&a√&7: {rating} &7| &f{name}'
+
+game:
+  # 默认随机分配队伍数量
+  # 默认为 2
+  default-team-size: 2
+  # 默认游戏目标分数
+  # 默认为 50
+  default-score: 50
+  # 默认游戏轮数, 即每个队伍分配的目标数
+  # 默认为 50
+  default-round: 50
+  # 是否开启唯一目标
+  # 如果关闭, 则可能会导致队伍之间存在重复目标
+  # 默认为 true
+  unique-goals: true
