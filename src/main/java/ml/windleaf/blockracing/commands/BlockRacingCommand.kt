@@ -27,8 +27,13 @@ class BlockRacingCommand: CommandExecutor, TabCompleter {
         }
       }
       2 -> {
-        when (args[1]) {
-          "start" -> startGame()
+        when (args[0]) {
+          "start" -> {
+            try {
+              val score = args[1].toInt()
+              startGame(score)
+            } catch (e: NumberFormatException) { errorArgs() }
+          }
           else -> errorCommand()
         }
       }
@@ -39,6 +44,9 @@ class BlockRacingCommand: CommandExecutor, TabCompleter {
 
   private fun errorCommand() =
     pluginLogger.send(sender, "&c这是一个错误的命令, 请使用 &6/br help &c来获取帮助!")
+
+  private fun errorArgs() =
+    pluginLogger.send(sender, "&c参数错误, 请正确输入参数!")
 
   private fun getHelp() =
     listOf(
