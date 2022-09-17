@@ -13,10 +13,12 @@ import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
 class ScoreboardManager {
-  private val boards: HashMap<UUID, FastBoard> = hashMapOf()
-  private val goals: HashMap<Team, ArrayList<GoalBlock>> = hashMapOf()
-  private val scores: HashMap<Team, Int> = hashMapOf()
-  private val succeedGoal: HashMap<Team, GoalBlock> = hashMapOf()
+  companion object {
+    private val boards: HashMap<UUID, FastBoard> = hashMapOf()
+    val goals: HashMap<Team, ArrayList<GoalBlock>> = hashMapOf()
+    private val scores: HashMap<Team, Int> = hashMapOf()
+    private val succeedGoal: HashMap<Team, GoalBlock> = hashMapOf()
+  }
 
   private val pluginConfig = BlockRacing.configInstances["config"] as PluginConfig
   private val title = pluginConfig.get("score.title") as String
@@ -26,7 +28,7 @@ class ScoreboardManager {
   private val formatGoalSuccess = pluginConfig.get("score.format.goal.success") as String
 
   fun updateGoals(team: Team, goals: ArrayList<GoalBlock>) {
-    this.goals[team] = goals
+    Companion.goals[team] = goals
   }
 
   fun getScore(team: Team) = scores[team]

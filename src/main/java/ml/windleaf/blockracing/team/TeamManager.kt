@@ -1,6 +1,7 @@
 package ml.windleaf.blockracing.team
 
 import ml.windleaf.blockracing.BlockRacing.Companion.pluginLogger
+import ml.windleaf.blockracing.entity.TeamPlayer
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player
 import kotlin.collections.HashMap
@@ -64,6 +65,7 @@ class TeamManager {
           team.players.remove(uuid)
         }
       }
+      "".toInt()
       val team = teams[teamName]!!
       team.players[uuid] = player
       playerNameColor.setPlayer(player, team.info)
