@@ -5,7 +5,6 @@ import ml.windleaf.blockracing.BlockRacing
 import ml.windleaf.blockracing.configurations.PluginConfig
 import ml.windleaf.blockracing.entity.goals.GoalBlock
 import ml.windleaf.blockracing.team.Team
-import ml.windleaf.blockracing.translations.TranslationManager.Companion.getBlockTranslation
 import ml.windleaf.blockracing.utils.StringUtil
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player
@@ -34,7 +33,7 @@ class ScoreboardManager {
 
   fun render() {
     goals.forEach { (team, goalsList) ->
-      val t = team.team
+      val t = team.info
       val list = arrayListOf<String>()
       val teamName = "name" to "${t.color}${t.teamName}"
       val teamScore = "score" to (getScore(team) ?: "")

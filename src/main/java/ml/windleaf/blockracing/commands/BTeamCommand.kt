@@ -81,7 +81,7 @@ class BTeamCommand: CommandExecutor, TabCompleter {
     pluginLogger.send(sender, "--- 所有队伍如下 ---")
     val teams = BlockRacing.teamManager.getTeams()
     teams.forEach {
-      val team = it.team
+      val team = it.info
       pluginLogger.send(sender, "${team.color}${team.teamName}")
       it.players.forEach { entry ->
         pluginLogger.send(sender, "${team.color} - ${entry.value.displayName}")

@@ -30,8 +30,8 @@ class TeamManager {
   fun addRandomTeam(): TeamInfo? {
     return if (teams.size != TeamInfo.values().size) {
       var team: TeamInfo? = null
-      while (team == null || teams.values.any { it.team == team }) {
-        team = TeamInfo.getRandomTeam(expect = teams.values.map { it.team })
+      while (team == null || teams.values.any { it.info == team }) {
+        team = TeamInfo.getRandomTeam(expect = teams.values.map { it.info })
       }
       teams[team.teamName] = Team(team)
       TeamInfo.availableList.remove(team)
@@ -44,8 +44,8 @@ class TeamManager {
       val team = teams[name]!!
       team.reset()
       teams.remove(name)
-      TeamInfo.availableList.add(team.team)
-      team.team
+      TeamInfo.availableList.add(team.info)
+      team.info
     } else null
   }
 
@@ -66,9 +66,9 @@ class TeamManager {
       }
       val team = teams[teamName]!!
       team.players[uuid] = player
-      playerNameColor.setPlayer(player, team.team)
-      pluginLogger.send(player, "&a你已加入 ${team.team.color}${team.team.teamName}&a!")
-      team.team
+      playerNameColor.setPlayer(player, team.info)
+      pluginLogger.send(player, "&a你已加入 ${team.info.color}${team.info.teamName}&a!")
+      team.info
     } else null
   }
 }
