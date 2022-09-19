@@ -9,5 +9,5 @@ class PluginConfig: IConfiguration("config") {
     config = Yaml("config", "plugins/BlockRacing")
   }
 
-  fun get(path: String): Any? = config.get(path)
+  fun get(path: String): String? = config.get(path) as String?
 }

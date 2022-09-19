@@ -14,7 +14,7 @@ class Game {
   private val goals = BlockRacing.configInstances["goals"] as GoalsConfig
   private var score: Int = 0
   private var round: Int = 0
-  private val unique = pluginConfig.get("game.unique-goals") as Boolean
+  private val unique = pluginConfig.get("game.unique-goals")!!.toBoolean()
 
   fun start(score: Int, round: Int) {
     this.score = score
@@ -24,7 +24,7 @@ class Game {
     val teams = teamManager.getTeams()
     if (teams.size <= 1) {
       log("&e未检测到队伍, 开始随机分配队伍...")
-      teamManager.randomizePlayers(pluginConfig.get("game.default-team-size") as Int)
+      teamManager.randomizePlayers(pluginConfig.get("game.default-team-size")!!.toInt())
     }
 
     log("&f分配队伍目标...")

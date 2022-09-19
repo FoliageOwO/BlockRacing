@@ -6,6 +6,7 @@ import ml.windleaf.blockracing.BlockRacing.Companion.pluginLogger
 import ml.windleaf.blockracing.configurations.GoalsConfig
 import ml.windleaf.blockracing.configurations.PluginConfig
 import ml.windleaf.blockracing.entity.goals.GoalColumn
+import org.bukkit.Bukkit
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
@@ -16,8 +17,8 @@ class BlockRacingCommand: CommandExecutor, TabCompleter {
   private val config = BlockRacing.configInstances["goals"] as GoalsConfig
   private val pluginConfig = BlockRacing.configInstances["config"] as PluginConfig
   private lateinit var sender: CommandSender
-  private var score by Delegates.notNull<Int>()
-  private var round by Delegates.notNull<Int>()
+  private var score: Int = 0
+  private var round: Int = 0
 
   override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
     this.sender = sender
@@ -29,6 +30,7 @@ class BlockRacingCommand: CommandExecutor, TabCompleter {
           "help" -> getHelp()
           "goals" -> getGoals()
           "start" -> startGame(score, round)
+          "start-force" -> startGame(score, round, true)
           else -> errorCommand()
         }
       }
@@ -63,6 +65,7 @@ class BlockRacingCommand: CommandExecutor, TabCompleter {
       "&2/br goals &f- &6查看所有可用目标",
       "&2/br start &f- &6使用已有设置开始游戏",
       "&2/br start <score> <round> &f- &6自定义目标分数和轮数开始游戏",
+      "&2/br start-force &f- &6强制开始游戏",
       "&2/br score <value> &f- &6自定义游戏分数",
       "&2/br round <value> &f- &6自定义游戏轮数"
     ).forEach {
@@ -73,9 +76,16 @@ class BlockRacingCommand: CommandExecutor, TabCompleter {
 
   private fun round(round: Int) { this.round = round }
 
-  private fun startGame(score: Int?, round: Int?) =
-    game.start(score ?: pluginConfig.get("game.default-score") as Int,
-      round ?: pluginConfig.get("game.default-round") as Int)
+  private fun startGame(score: Int?, round: Int?, ignorePlayerSize: Boolean = false) {
+    val start = { game.start(score ?: pluginConfig.get("game.default-score")!!.toInt(),
+      round ?: pluginConfig.get("game.default-round")!!.toInt()) }
+    if (ignorePlayerSize) {
+      start.invoke()
+    } else {
+      if (Bukkit.getOnlinePlayers().size >= 2) start.invoke()
+      else pluginLogger.send(sender, "&c必须要有两个及以上玩家才可以开始游戏!")
+    }
+  }
 
   private fun getGoals() {
     val goals = config.getGoals()

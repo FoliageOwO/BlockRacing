@@ -16,5 +16,5 @@ class TranslationManager {
     }
   }
 
-  fun getTranslationInstance() = translations[pluginConfig.get("translation")]
+  fun getTranslationInstance() = translations[pluginConfig.get("translation")!!]
 }

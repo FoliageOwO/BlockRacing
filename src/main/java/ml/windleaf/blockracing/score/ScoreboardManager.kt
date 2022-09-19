@@ -21,11 +21,11 @@ class ScoreboardManager {
   }
 
   private val pluginConfig = BlockRacing.configInstances["config"] as PluginConfig
-  private val title = pluginConfig.get("score.title") as String
-  private val size = pluginConfig.get("score.size") as Int
-  private val formatTeam = pluginConfig.get("score.format.team") as String
-  private val formatGoalNormal = pluginConfig.get("score.format.goal.normal") as String
-  private val formatGoalSuccess = pluginConfig.get("score.format.goal.success") as String
+  private val title = pluginConfig.get("score.title")!!
+  private val size = pluginConfig.get("score.size")!!.toInt()
+  private val formatTeam = pluginConfig.get("score.format.team")!!
+  private val formatGoalNormal = pluginConfig.get("score.format.goal.normal")!!
+  private val formatGoalSuccess = pluginConfig.get("score.format.goal.success")!!
 
   fun updateGoals(team: Team, goals: ArrayList<GoalBlock>) {
     Companion.goals[team] = goals

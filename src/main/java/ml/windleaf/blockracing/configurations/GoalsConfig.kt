@@ -14,14 +14,6 @@ class GoalsConfig: IConfiguration("goals") {
 
   override fun loadConfig() {
     goals = Yaml("goals", "plugins/BlockRacing")
-
-    getGoals().forEach { column ->
-      column.blocks.forEach { block ->
-        val material = block.material
-        if (material.isAir || !material.isBlock)
-          pluginLogger.log("&l&c无法读取方块名 ${column.rating.key}.blocks.$block, 请正确输入方块名!")
-      }
-    }
   }
 
   fun getRatings(): ArrayList<Rating> {
