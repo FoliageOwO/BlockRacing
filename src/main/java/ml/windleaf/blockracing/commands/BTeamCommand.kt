@@ -96,7 +96,7 @@ class BTeamCommand: CommandExecutor, TabCompleter {
     if (team != null) {
       val info = team.info
       val name = "${info.color}${info.teamName}"
-      pluginLogger.send(sender, "--- ${name}对应的目标如下 ---")
+      pluginLogger.send(sender, "--- ${name}&r对应的目标如下 ---")
       ScoreboardManager.goals.forEach { pair ->
         if (pair.key == team) {
           pair.value.forEach { goal ->
