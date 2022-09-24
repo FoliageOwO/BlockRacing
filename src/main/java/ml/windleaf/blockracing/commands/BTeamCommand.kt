@@ -119,7 +119,8 @@ class BTeamCommand: CommandExecutor, TabCompleter {
       "&2/bt list &f- &6查看所有队伍",
       "&2/bt remove <name> &f- &6删除一个队伍",
       "&2/bt join <name> <player> &f- &6使玩家加入一个队伍",
-      "&2/bt randomize <size> &f- &6随机分配指定数量队伍"
+      "&2/bt randomize <size> &f- &6随机分配指定数量队伍",
+      "&2/bt goals <name> &f- &6查看队伍的所有目标"
     ).forEach {
       pluginLogger.send(sender, it, withPrefix = false)
     }
