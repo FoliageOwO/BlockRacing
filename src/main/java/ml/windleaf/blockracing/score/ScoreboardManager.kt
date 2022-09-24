@@ -34,9 +34,9 @@ class ScoreboardManager {
   fun getScore(team: Team) = scores[team]
 
   fun render() {
+    val list = arrayListOf<String>()
     goals.forEach { (team, goalsList) ->
       val t = team.info
-      val list = arrayListOf<String>()
       val teamName = "name" to "${t.color}${t.teamName}"
       val teamScore = "score" to (getScore(team) ?: "")
       val gameMode = "mode" to "TODO" // todo
@@ -54,6 +54,7 @@ class ScoreboardManager {
         list.add(StringUtil.map(formatGoalNormal, hashMapOf(name, rating)))
       }
     }
+    boards.values.forEach { board -> board.updateLines(list) }
   }
 
   fun newBoard(player: Player) {
