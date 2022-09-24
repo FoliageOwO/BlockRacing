@@ -2,6 +2,7 @@ package ml.windleaf.blockracing.commands
 
 import ml.windleaf.blockracing.BlockRacing
 import ml.windleaf.blockracing.BlockRacing.Companion.pluginLogger
+import ml.windleaf.blockracing.score.ScoreboardManager
 import org.bukkit.Bukkit
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
@@ -30,6 +31,7 @@ class BTeamCommand: CommandExecutor, TabCompleter {
         when (first) {
           "remove" -> removeTeam(args[1])
           "randomize" -> randomizeTeam(args[1].toIntOrNull())
+          "goals" -> getGoals(args[1])
           else -> errorCommand()
         }
       }
@@ -87,6 +89,22 @@ class BTeamCommand: CommandExecutor, TabCompleter {
         pluginLogger.send(sender, "${team.color} - ${entry.value.displayName}")
       }
     }
+  }
+
+  private fun getGoals(teamName: String) {
+    val team = BlockRacing.teamManager.getTeams().find { it.info.teamName == teamName }
+    if (team != null) {
+      val info = team.info
+      val name = "${info.color}${info.teamName}"
+      pluginLogger.send(sender, "--- ${name}对应的目标如下 ---")
+      ScoreboardManager.goals.forEach { pair ->
+        if (pair.key == team) {
+          pair.value.forEach { goal ->
+            pluginLogger.send(sender, "${goal.rating.color} - ${goal.translation}")
+          }
+        }
+      }
+    } else pluginLogger.send(sender, "&c无法找到名为 [&f$teamName&c] 的队伍!")
   }
 
   private fun errorCommand() =
