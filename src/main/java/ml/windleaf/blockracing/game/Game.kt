@@ -35,7 +35,7 @@ class Game {
     val goals: HashMap<Team, ArrayList<GoalBlock>> = hashMapOf()
     teams.forEach { team ->
       availableGoals = ArrayList(availableGoals.shuffled())
-      val g = if (availableGoals.size <= round) availableGoals else availableGoals.subList(0, round - 1)
+      val g = if (availableGoals.size <= round) availableGoals else availableGoals.subList(0, round)
       goals[team] = ArrayList(g)
       if (!unique) availableGoals.removeAll(g.toSet())
     }
