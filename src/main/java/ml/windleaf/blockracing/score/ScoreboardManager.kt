@@ -21,7 +21,7 @@ class ScoreboardManager {
   }
 
   private val pluginConfig = BlockRacing.configInstances["config"] as PluginConfig
-  private val title = pluginConfig.get("score.title")!!
+  private val title = StringUtil.color(pluginConfig.get("score.title")!!)
   private val size = pluginConfig.get("score.size")!!.toInt()
   private val formatTeam = pluginConfig.get("score.format.team")!!
   private val formatGoalNormal = pluginConfig.get("score.format.goal.normal")!!
@@ -37,24 +37,25 @@ class ScoreboardManager {
     val list = arrayListOf<String>()
     goals.forEach { (team, goalsList) ->
       val t = team.info
-      val teamName = "name" to "${t.color}${t.teamName}"
-      val teamScore = "score" to (getScore(team) ?: "")
+      val teamName = "name" to "${t.color}${t.teamName}&r"
+      val teamScore = "score" to (getScore(team) ?: 0)
       val gameMode = "mode" to "TODO" // todo
       val succeedGoal = succeedGoal[team]
       val succeedRating = succeedGoal?.rating
       list.add(StringUtil.map(formatTeam, hashMapOf(teamName, teamScore, gameMode)))
       if (succeedGoal != null) {
-        val goalRating = "rating" to "${succeedRating?.color}${succeedRating?.name}"
+        val goalRating = "rating" to "${succeedRating?.color}${succeedRating?.name}&r"
         val succeedGoalName = "name" to succeedGoal.name
         list.add(StringUtil.map(formatGoalSuccess, hashMapOf(succeedGoalName, goalRating)))
       }
-      (if (goalsList.size <= size) goalsList else goalsList.subList(0, size - 1)).forEach { goalBlock ->
+      (if (goalsList.size <= size) goalsList else goalsList.subList(0, size)).forEach { goalBlock ->
         val name = "name" to goalBlock.translation
-        val rating = "rating" to goalBlock.rating
+        val rating = "rating" to "${goalBlock.rating.color}${goalBlock.rating.name}&r"
         list.add(StringUtil.map(formatGoalNormal, hashMapOf(name, rating)))
       }
+      list.add("")
     }
-    boards.values.forEach { board -> board.updateLines(list) }
+    boards.values.forEach { board -> board.updateLines(list.map { StringUtil.color(it) }) }
   }
 
   fun newBoard(player: Player) {
