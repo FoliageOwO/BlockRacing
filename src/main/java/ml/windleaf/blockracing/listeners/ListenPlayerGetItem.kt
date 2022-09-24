@@ -1,10 +1,9 @@
 package ml.windleaf.blockracing.listeners
 
+import ml.windleaf.blockracing.BlockRacing
 import ml.windleaf.blockracing.BlockRacing.Companion.instance
 import ml.windleaf.blockracing.BlockRacing.Companion.pluginManager
-import ml.windleaf.blockracing.entity.TeamPlayer
 import ml.windleaf.blockracing.entity.goals.GoalBlock
-import ml.windleaf.blockracing.entity.toTeamPlayer
 import ml.windleaf.blockracing.events.PlayerCompleteGoalEvent
 import ml.windleaf.blockracing.score.ScoreboardManager
 import ml.windleaf.blockracing.team.Team
@@ -21,13 +20,10 @@ import org.bukkit.event.inventory.InventoryType
 import org.bukkit.inventory.PlayerInventory
 
 class ListenPlayerGetItem(private val who: Player): Listener {
-  private lateinit var teamPlayer: TeamPlayer
-
   private fun checkAndCall(material: Material?) {
-    val teamPlayer = who.toTeamPlayer()
-    if (teamPlayer != null) {
-      this.teamPlayer = teamPlayer
-      if (teamPlayer.getTeam().getGoals().any { it.material == material }) {
+    val team = BlockRacing.teamManager.getTeams().find { it.players.containsValue(who) }
+    if (team != null) {
+      if (team.getGoals().any { it.material == material }) {
         val event = PlayerCompleteGoalEvent(who)
         Bukkit.getScheduler().runTask(instance) { _ -> pluginManager.callEvent(event) }
       }
