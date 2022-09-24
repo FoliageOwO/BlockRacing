@@ -34,7 +34,7 @@ class ScoreboardManager {
   fun getScore(team: Team) = scores[team]
 
   fun render() {
-    val list = arrayListOf<String>()
+    var list = arrayListOf<String>()
     goals.forEach { (team, goalsList) ->
       val t = team.info
       val teamName = "name" to "${t.color}${t.teamName}&r"
@@ -53,8 +53,9 @@ class ScoreboardManager {
         val rating = "rating" to "${goalBlock.rating.color}${goalBlock.rating.name}&r"
         list.add(StringUtil.map(formatGoalNormal, hashMapOf(name, rating)))
       }
-      list.add("")
+      list.add("&7--------------")
     }
+    list = ArrayList(list.subList(0, list.size - 1))
     boards.values.forEach { board -> board.updateLines(list.map { StringUtil.color(it) }) }
   }
 
@@ -65,6 +66,14 @@ class ScoreboardManager {
   }
 
   fun removeBoard(player: Player) = boards.remove(player.uniqueId)?.delete()
+
+  fun reset() {
+    boards.values.forEach(FastBoard::delete)
+    boards.clear()
+    goals.clear()
+    scores.clear()
+    succeedGoal.clear()
+  }
 
   fun update(lines: ArrayList<String>, scope: (Player) -> Boolean) {
     boards.forEach { (uuid, board) ->

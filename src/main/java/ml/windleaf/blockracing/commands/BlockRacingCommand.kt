@@ -31,6 +31,7 @@ class BlockRacingCommand: CommandExecutor, TabCompleter {
           "goals" -> getGoals()
           "start" -> startGame(score, round)
           "start-force" -> startGame(score, round, true)
+          "stop" -> stopGame()
           else -> errorCommand()
         }
       }
@@ -67,7 +68,8 @@ class BlockRacingCommand: CommandExecutor, TabCompleter {
       "&2/br start <score> <round> &f- &6自定义目标分数和轮数开始游戏",
       "&2/br start-force &f- &6强制开始游戏",
       "&2/br score <value> &f- &6自定义游戏分数",
-      "&2/br round <value> &f- &6自定义游戏轮数"
+      "&2/br round <value> &f- &6自定义游戏轮数",
+      "&2/br stop &f- &6强制结束游戏"
     ).forEach {
       pluginLogger.send(sender, it, withPrefix = false)
     }
@@ -86,6 +88,8 @@ class BlockRacingCommand: CommandExecutor, TabCompleter {
       else pluginLogger.send(sender, "&c必须要有两个及以上玩家才可以开始游戏!")
     }
   }
+
+  private fun stopGame() = game.stop()
 
   private fun getGoals() {
     val goals = config.getGoals()

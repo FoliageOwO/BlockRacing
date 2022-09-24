@@ -8,6 +8,9 @@ import ml.windleaf.blockracing.configurations.GoalsConfig
 import ml.windleaf.blockracing.configurations.PluginConfig
 import ml.windleaf.blockracing.entity.goals.GoalBlock
 import ml.windleaf.blockracing.team.Team
+import ml.windleaf.blockracing.utils.StringUtil
+import org.bukkit.Bukkit
+import org.bukkit.command.CommandSender
 
 class Game {
   private val pluginConfig = BlockRacing.configInstances["config"] as PluginConfig
@@ -45,11 +48,16 @@ class Game {
       scoreboardManager.updateGoals(team, goals[team]!!)
       team.players.values.forEach { player ->
         val t = team.info
-        pluginLogger.send(player, "&a游戏即将开始, 你的队伍是: ${t.color}${t.teamName}&a!")
+        pluginLogger.send(player, "&a游戏开始! 你的队伍是: ${t.color}${t.teamName}&a!")
         scoreboardManager.newBoard(player)
       }
     }
     scoreboardManager.render()
+  }
+
+  fun stop() {
+    scoreboardManager.reset()
+    Bukkit.getOnlinePlayers().forEach { p -> pluginLogger.send(p, "&f游戏已结束!") }
   }
 
   private fun log(msg: String) = pluginLogger.log(msg)

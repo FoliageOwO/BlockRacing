@@ -22,12 +22,6 @@ class PluginLogger(name: String, color: String) {
   }
 
   /**
-   * 同 [send], 不过可以一次性发送消息到很多对象
-   */
-  fun send(sender: List<CommandSender>, vararg any: Any, withPrefix: Boolean = true) =
-    sender.forEach { send(it, any, withPrefix = withPrefix) }
-
-  /**
    * 向控制台发送消息
    * @param any 消息对象, 可以是任何 [Object]
    * @param withPrefix 是否带上插件名称前缀, 默认为 `true`
