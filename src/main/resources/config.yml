@@ -37,5 +37,5 @@ game:
   default-round: 50
   # 是否开启唯一目标
   # 如果关闭, 则可能会导致队伍之间存在重复目标
-  # 默认为 true
-  unique-goals: true
+  # 默认为 false
+  unique-goals: false
