@@ -6,7 +6,6 @@ import ml.windleaf.blockracing.configurations.ConfigManager
 import ml.windleaf.blockracing.configurations.IConfiguration
 import ml.windleaf.blockracing.game.Game
 import ml.windleaf.blockracing.listeners.ListenPlayerGetItem
-import ml.windleaf.blockracing.listeners.ListenPlayerJoin
 import ml.windleaf.blockracing.logging.PluginLogger
 import ml.windleaf.blockracing.score.ScoreboardManager
 import ml.windleaf.blockracing.team.TeamManager
@@ -64,7 +63,8 @@ class BlockRacing: JavaPlugin() {
   }
 
   private fun registerListeners() {
-    pluginManager.registerEvents(ListenPlayerJoin(), this)
-    Bukkit.getOnlinePlayers().forEach { pluginManager.registerEvents(ListenPlayerGetItem(it), this) }
+    Bukkit.getOnlinePlayers().forEach { p ->
+      Bukkit.getScheduler().runTaskTimerAsynchronously(this, ListenPlayerGetItem(p), 0, 1)
+    }
   }
 }
