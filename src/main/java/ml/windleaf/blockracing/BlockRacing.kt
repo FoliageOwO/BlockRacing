@@ -5,12 +5,10 @@ import ml.windleaf.blockracing.commands.BlockRacingCommand
 import ml.windleaf.blockracing.configurations.ConfigManager
 import ml.windleaf.blockracing.configurations.IConfiguration
 import ml.windleaf.blockracing.game.Game
-import ml.windleaf.blockracing.listeners.ListenPlayerGetItem
 import ml.windleaf.blockracing.logging.PluginLogger
 import ml.windleaf.blockracing.score.ScoreboardManager
 import ml.windleaf.blockracing.team.TeamManager
 import ml.windleaf.blockracing.translations.TranslationManager
-import org.bukkit.Bukkit
 import org.bukkit.plugin.PluginManager
 import org.bukkit.plugin.java.JavaPlugin
 
@@ -44,7 +42,6 @@ class BlockRacing: JavaPlugin() {
     scoreboardManager = ScoreboardManager()
     game = Game()
     registerCommands()
-    registerListeners()
 
     val endTime = System.currentTimeMillis()
     pluginLogger.log("&a加载完成, 共耗时 ${endTime - startTime} 毫秒!")
@@ -60,11 +57,5 @@ class BlockRacing: JavaPlugin() {
     val btC = BTeamCommand()
     bt?.setExecutor(btC)
     bt?.tabCompleter = btC
-  }
-
-  private fun registerListeners() {
-    Bukkit.getOnlinePlayers().forEach { p ->
-      Bukkit.getScheduler().runTaskTimerAsynchronously(this, ListenPlayerGetItem(p), 0, 1)
-    }
   }
 }

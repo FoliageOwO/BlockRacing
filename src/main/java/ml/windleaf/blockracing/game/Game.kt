@@ -1,16 +1,18 @@
 package ml.windleaf.blockracing.game
 
 import ml.windleaf.blockracing.BlockRacing
+import ml.windleaf.blockracing.BlockRacing.Companion.instance
 import ml.windleaf.blockracing.BlockRacing.Companion.pluginLogger
 import ml.windleaf.blockracing.BlockRacing.Companion.scoreboardManager
 import ml.windleaf.blockracing.BlockRacing.Companion.teamManager
 import ml.windleaf.blockracing.configurations.GoalsConfig
 import ml.windleaf.blockracing.configurations.PluginConfig
 import ml.windleaf.blockracing.entity.goals.GoalBlock
+import ml.windleaf.blockracing.listeners.ListenPlayerGetItem
 import ml.windleaf.blockracing.team.Team
-import ml.windleaf.blockracing.utils.StringUtil
 import org.bukkit.Bukkit
-import org.bukkit.command.CommandSender
+import org.bukkit.entity.Player
+import org.bukkit.scheduler.BukkitTask
 
 class Game {
   private val pluginConfig = BlockRacing.configInstances["config"] as PluginConfig
@@ -18,6 +20,7 @@ class Game {
   private var score: Int = 0
   private var round: Int = 0
   private val unique = pluginConfig.get("game.unique-goals")!!.toBoolean()
+  private val listenerTasks: HashMap<Player, BukkitTask> = hashMapOf()
 
   fun start(score: Int, round: Int) {
     this.score = score
@@ -53,10 +56,17 @@ class Game {
       }
     }
     scoreboardManager.render()
+
+    log("&a注册监听器...")
+    Bukkit.getOnlinePlayers().forEach { p ->
+      val task = Bukkit.getScheduler().runTaskTimerAsynchronously(instance, ListenPlayerGetItem(p), 0, 1)
+      listenerTasks[p] = task
+    }
   }
 
   fun stop() {
     scoreboardManager.reset()
+    listenerTasks.values.forEach(BukkitTask::cancel)
     Bukkit.getOnlinePlayers().forEach { p -> pluginLogger.send(p, "&f游戏已结束!") }
   }
 
