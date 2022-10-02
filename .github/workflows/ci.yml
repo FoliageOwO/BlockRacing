@@ -14,7 +14,7 @@ jobs:
         distribution: 'corretto'
         cache: maven
     - name: Build with Maven
-      run: mvn -B package --file pom.xml
+      run: mvn clean kotlin:compile package -Dmaven.test.skip=true
     - name: Upload Artifact
       uses: actions/upload-artifact@v3.1.0
       with:
