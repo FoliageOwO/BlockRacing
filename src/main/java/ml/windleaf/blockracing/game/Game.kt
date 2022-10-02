@@ -3,12 +3,11 @@ package ml.windleaf.blockracing.game
 import ml.windleaf.blockracing.BlockRacing
 import ml.windleaf.blockracing.BlockRacing.Companion.instance
 import ml.windleaf.blockracing.BlockRacing.Companion.pluginLogger
-import ml.windleaf.blockracing.BlockRacing.Companion.scoreboardManager
+import ml.windleaf.blockracing.BlockRacing.Companion.scoreManager
 import ml.windleaf.blockracing.BlockRacing.Companion.teamManager
 import ml.windleaf.blockracing.configurations.GoalsConfig
 import ml.windleaf.blockracing.configurations.PluginConfig
 import ml.windleaf.blockracing.entity.goals.GoalBlock
-import ml.windleaf.blockracing.listeners.ListenPlayerGetItem
 import ml.windleaf.blockracing.team.Team
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player
@@ -35,9 +34,7 @@ class Game {
 
     log("&f分配队伍目标...")
     var availableGoals = arrayListOf<GoalBlock>()
-    this.goals.getGoals().forEach { column ->
-      column.blocks.forEach { block -> availableGoals.add(block) }
-    }
+    this.goals.getGoals().forEach { column -> column.blocks.forEach { block -> availableGoals.add(block) } }
     val goals: HashMap<Team, ArrayList<GoalBlock>> = hashMapOf()
     teams.forEach { team ->
       availableGoals = ArrayList(availableGoals.shuffled())
@@ -48,14 +45,14 @@ class Game {
 
     log("&f配置计分板...")
     teams.forEach { team ->
-      scoreboardManager.updateGoals(team, goals[team]!!)
+      scoreManager.updateGoals(team, goals[team]!!)
       team.players.values.forEach { player ->
         val t = team.info
-        pluginLogger.send(player, "&a游戏开始! 你的队伍是: ${t.color}${t.teamName}&a!")
-        scoreboardManager.newBoard(player)
+        pluginLogger.send(player, "&8[&a!&8]&a 游戏开始! 你的队伍是: ${t.color}${t.teamName}&a!", withPrefix = false)
+        scoreManager.newBoard(player)
       }
     }
-    scoreboardManager.render()
+    scoreManager.renderScoreboard()
 
     log("&a注册监听器...")
     Bukkit.getOnlinePlayers().forEach { p ->
@@ -65,9 +62,9 @@ class Game {
   }
 
   fun stop() {
-    scoreboardManager.reset()
+    scoreManager.reset()
     listenerTasks.values.forEach(BukkitTask::cancel)
-    Bukkit.getOnlinePlayers().forEach { p -> pluginLogger.send(p, "&f游戏已结束!") }
+    pluginLogger.broadcast("&a游戏已结束!")
   }
 
   private fun log(msg: String) = pluginLogger.log(msg)

@@ -6,7 +6,7 @@ import ml.windleaf.blockracing.configurations.ConfigManager
 import ml.windleaf.blockracing.configurations.IConfiguration
 import ml.windleaf.blockracing.game.Game
 import ml.windleaf.blockracing.logging.PluginLogger
-import ml.windleaf.blockracing.score.ScoreboardManager
+import ml.windleaf.blockracing.game.ScoreManager
 import ml.windleaf.blockracing.team.TeamManager
 import ml.windleaf.blockracing.translations.TranslationManager
 import org.bukkit.plugin.PluginManager
@@ -20,7 +20,7 @@ class BlockRacing: JavaPlugin() {
     lateinit var configManager: ConfigManager
     lateinit var teamManager: TeamManager
     lateinit var translationManager: TranslationManager
-    lateinit var scoreboardManager: ScoreboardManager
+    lateinit var scoreManager: ScoreManager
     lateinit var game: Game
 
     val configInstances = mutableMapOf<String, IConfiguration>()
@@ -39,7 +39,7 @@ class BlockRacing: JavaPlugin() {
     configManager = ConfigManager()
     teamManager = TeamManager()
     translationManager = TranslationManager()
-    scoreboardManager = ScoreboardManager()
+    scoreManager = ScoreManager()
     game = Game()
     registerCommands()
 

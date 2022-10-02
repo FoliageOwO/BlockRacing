@@ -1,4 +1,4 @@
-package ml.windleaf.blockracing.score
+package ml.windleaf.blockracing.game
 
 import fr.mrmicky.fastboard.FastBoard
 import ml.windleaf.blockracing.BlockRacing
@@ -12,7 +12,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
-class ScoreboardManager {
+class ScoreManager {
   companion object {
     private val boards: HashMap<UUID, FastBoard> = hashMapOf()
     val goals: HashMap<Team, ArrayList<GoalBlock>> = hashMapOf()
@@ -33,7 +33,7 @@ class ScoreboardManager {
 
   fun getScore(team: Team) = scores[team]
 
-  fun render() {
+  fun renderScoreboard() {
     var list = arrayListOf<String>()
     goals.forEach { (team, goalsList) ->
       val t = team.info

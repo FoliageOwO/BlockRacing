@@ -37,7 +37,9 @@ class GoalsConfig: IConfiguration("goals") {
       blocks.forEach { blockName ->
         val material = Material.getMaterial(blockName.uppercase()) ?: Material.AIR
         this.blocks[blockName] = material
-        goalBlocks.add(GoalBlock(blockName, getBlockTranslation(blockName), material, rating))
+        val translation = getBlockTranslation(blockName)
+        goalBlocks.add(GoalBlock(blockName, translation, material, rating,
+          "${rating.color}${rating.name} | $translation"))
       }
       result.add(GoalColumn(rating, goalBlocks))
     }

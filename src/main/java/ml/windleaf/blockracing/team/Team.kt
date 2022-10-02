@@ -1,5 +1,7 @@
 package ml.windleaf.blockracing.team
 
+import ml.windleaf.blockracing.entity.goals.GoalBlock
+import ml.windleaf.blockracing.game.ScoreManager
 import org.bukkit.entity.Player
 
 class Team(val info: TeamInfo) {
@@ -13,4 +15,9 @@ class Team(val info: TeamInfo) {
       TeamManager.playerNameColor.reset(it.value)
     }
   }
+
+  /**
+   * 获取当前队伍的所有目标
+   */
+  fun getGoals(): ArrayList<GoalBlock> = ArrayList(ScoreManager.goals[this]!!)
 }

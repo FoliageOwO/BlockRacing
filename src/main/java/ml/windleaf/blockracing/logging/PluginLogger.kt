@@ -28,4 +28,7 @@ class PluginLogger(name: String, color: String) {
    */
   fun log(vararg any: Any, withPrefix: Boolean = true) =
     send(Bukkit.getConsoleSender(), *any, withPrefix = withPrefix)
+
+  fun broadcast(vararg any: Any, withPrefix: Boolean = true) =
+    Bukkit.getOnlinePlayers().forEach { send(it, *any, withPrefix = withPrefix) }
 }

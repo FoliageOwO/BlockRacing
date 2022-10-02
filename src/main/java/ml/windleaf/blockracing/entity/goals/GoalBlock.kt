@@ -6,5 +6,6 @@ data class GoalBlock(
   val name: String,
   val translation: String,
   val material: Material,
-  val rating: Rating
+  val rating: Rating,
+  val display: String
 )

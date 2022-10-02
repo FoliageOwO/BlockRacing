@@ -2,7 +2,7 @@ package ml.windleaf.blockracing.commands
 
 import ml.windleaf.blockracing.BlockRacing
 import ml.windleaf.blockracing.BlockRacing.Companion.pluginLogger
-import ml.windleaf.blockracing.score.ScoreboardManager
+import ml.windleaf.blockracing.game.ScoreManager
 import org.bukkit.Bukkit
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
@@ -97,11 +97,9 @@ class BTeamCommand: CommandExecutor, TabCompleter {
       val info = team.info
       val name = "${info.color}${info.teamName}"
       pluginLogger.send(sender, "--- ${name}&r对应的目标如下 ---")
-      ScoreboardManager.goals.forEach { pair ->
+      ScoreManager.goals.forEach { pair ->
         if (pair.key == team) {
-          pair.value.forEach { goal ->
-            pluginLogger.send(sender, "${goal.rating.color} - ${goal.translation}")
-          }
+          pair.value.forEach { goal -> pluginLogger.send(sender, goal.display) }
         }
       }
     } else pluginLogger.send(sender, "&c无法找到名为 [&f$teamName&c] 的队伍!")
