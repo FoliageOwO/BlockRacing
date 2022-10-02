@@ -57,7 +57,7 @@ class Game {
 
     log("&a注册监听器...")
     Bukkit.getOnlinePlayers().forEach { p ->
-      val task = Bukkit.getScheduler().runTaskTimerAsynchronously(instance, ListenPlayerGetItem(p), 0, 1)
+      val task = Bukkit.getScheduler().runTaskTimerAsynchronously(instance, ListenPlayerGetItem(p), 0, 10)
       listenerTasks[p] = task
     }
     registerListeners()

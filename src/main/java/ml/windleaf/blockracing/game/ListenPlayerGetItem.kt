@@ -16,7 +16,10 @@ class ListenPlayerGetItem(private val player: Player): Runnable {
       val inventory: PlayerInventory = player.inventory
       if (inventory.contains(it.material)) {
         val event = PlayerCompleteGoalEvent(player, team, it)
-        Bukkit.getScheduler().runTask(instance) { _ -> pluginManager.callEvent(event) }
+        Bukkit.getScheduler().runTask(instance) { _ ->
+          pluginManager.callEvent(event)
+          return@runTask
+        }
       }
     }
   }
