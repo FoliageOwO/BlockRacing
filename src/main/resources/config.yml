@@ -21,9 +21,9 @@ score:
     #   {rating} 当前目标的评级
     goal:
       # 普通目标
-      normal: '{rating} &7| &f{name}'
+      normal: '{rating} | {name}'
       # 已完成的一条目标
-      success: '&a√&7: {rating} &7| &f{name}'
+      success: '&a√&7: {rating} | {name}'
 
 game:
   # 默认随机分配队伍数量
