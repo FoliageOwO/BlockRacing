@@ -14,7 +14,7 @@ import org.bukkit.plugin.java.JavaPlugin
 
 class BlockRacing: JavaPlugin() {
   companion object {
-    val pluginLogger: PluginLogger = PluginLogger("BlockRacing", "&9")
+    val pluginLogger: PluginLogger = PluginLogger("BR", "&9")
     lateinit var instance: BlockRacing
     lateinit var pluginManager: PluginManager
     lateinit var configManager: ConfigManager
