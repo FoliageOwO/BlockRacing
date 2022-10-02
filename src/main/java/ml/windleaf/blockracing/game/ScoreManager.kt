@@ -31,14 +31,21 @@ class ScoreManager {
     Companion.goals[team] = goals
   }
 
-  fun getScore(team: Team) = scores[team]
+  fun getScore(team: Team): Int = scores[team] ?: 0
+
+  fun addScore(team: Team): Int {
+    var score = getScore(team)
+    score++
+    scores[team] = score
+    return score
+  }
 
   fun renderScoreboard() {
     var list = arrayListOf<String>()
     goals.forEach { (team, goalsList) ->
       val t = team.info
       val teamName = "name" to "${t.color}${t.teamName}&r"
-      val teamScore = "score" to (getScore(team) ?: 0)
+      val teamScore = "score" to getScore(team)
       val gameMode = "mode" to "TODO" // todo
       val succeedGoal = succeedGoal[team]
       val succeedRating = succeedGoal?.rating

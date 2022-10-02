@@ -21,6 +21,7 @@ class PlayerCompleteGoal: Listener {
     val goals: ArrayList<GoalBlock> = ArrayList(team.getGoals())
     goals.remove(goal)
     scoreManager.updateGoals(team, goals)
+    scoreManager.addScore(team)
     scoreManager.renderScoreboard()
     pluginLogger.broadcast(
       "&8[&e√&8]&8 ${info.color}${info.teamName}&8队员 [${player.displayName}&8] &a完成&8目标 [${goal.display}&8]!", withPrefix = false
