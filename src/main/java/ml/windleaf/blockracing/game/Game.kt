@@ -64,7 +64,7 @@ class Game {
   fun stop() {
     scoreManager.reset()
     listenerTasks.values.forEach(BukkitTask::cancel)
-    pluginLogger.broadcast("&a游戏已结束!")
+    pluginLogger.broadcast("&8[&a!&8]&a 游戏已结束!")
   }
 
   private fun log(msg: String) = pluginLogger.log(msg)
