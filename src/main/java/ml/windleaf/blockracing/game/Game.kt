@@ -8,6 +8,7 @@ import ml.windleaf.blockracing.BlockRacing.Companion.teamManager
 import ml.windleaf.blockracing.configurations.GoalsConfig
 import ml.windleaf.blockracing.configurations.PluginConfig
 import ml.windleaf.blockracing.entity.goals.GoalBlock
+import ml.windleaf.blockracing.game.listeners.PlayerCompleteGoal
 import ml.windleaf.blockracing.team.Team
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player
@@ -59,12 +60,18 @@ class Game {
       val task = Bukkit.getScheduler().runTaskTimerAsynchronously(instance, ListenPlayerGetItem(p), 0, 1)
       listenerTasks[p] = task
     }
+    registerListeners()
   }
 
   fun stop() {
     scoreManager.reset()
     listenerTasks.values.forEach(BukkitTask::cancel)
     pluginLogger.broadcast("&8[&a!&8]&a 游戏已结束!")
+  }
+
+  private fun registerListeners() {
+    val pm = instance.server.pluginManager
+    pm.registerEvents(PlayerCompleteGoal(), instance)
   }
 
   private fun log(msg: String) = pluginLogger.log(msg)
